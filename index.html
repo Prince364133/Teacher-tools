@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <h1 class="highlight-blue">POWERED BY BRDL</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: lightyellow;
+        }
+        h1 {
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .section {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+           <h1><input type="text" id="searchBar" placeholder="Search Tools..." onkeyup="searchTools()">
+</h1>
+<h1>Teacher Tools</h1>
+
+<!-- Home Assignment Tool -->
+<button class="button" onclick="toggleSection('lessonPlanning')">Lesson Planning</button>
+<div class="section" id="lessonPlanning">
+    <h2>Lesson Planning</h2>
+    <input type="text" id="lessonTopic" placeholder="Lesson Topic" required>
+    <input type="text" id="lessonObjectives" placeholder="Objectives" required>
+    <input type="text" id="lessonMaterials" placeholder="Materials Needed" required>
+    <textarea id="lessonActivities" placeholder="Activities" required></textarea>
+    <button class="button" onclick="processLessonPlanning()">Process Lesson</button>
+</div>
+
+<!-- Classroom Management Tips Tool -->
+<button class="button" onclick="toggleSection('managementTips')">Classroom Management Tips</button>
+<div class="section" id="managementTips">
+    <h2>Classroom Management Tips</h2>
+    <input type="text" id="classroomScenario" placeholder="Classroom Scenario" required>
+    <button class="button" onclick="processManagementTips()">Get Tips</button>
+</div>
+
+<!-- Communication with Parents Tool -->
+<button class="button" onclick="toggleSection('communication')">Communication with Parents</button>
+<div class="section" id="communication">
+    <h2>Communication with Parents</h2>
+    <input type="text" id="studentName" placeholder="Student Name" required>
+    <textarea id="concerns" placeholder="Concerns" required></textarea>
+    <button class="button" onclick="processCommunication()">Create Message</button>
+</div>
+
+<!-- Homework Assignment Tool -->
+<button class="button" onclick="toggleSection('homeworkAssignment')">Homework Assignment</button>
+<div class="section" id="homeworkAssignment">
+    <h2>Homework Assignment</h2>
+    <input type="text" id="assignmentTopic" placeholder="Assignment Topic" required>
+    <textarea id="assignmentInstructions" placeholder="Instructions" required></textarea>
+    <button class="button" onclick="processHomework()">Assign Homework</button>
+</div>
+
+<!-- Additional Tools -->
+<button class="button" onclick="toggleSection('resources')">Resource Ideas</button>
+<div class="section" id="resources">
+    <h2>Resource Ideas</h2>
+    <input type="text" id="resourceNeeds" placeholder="Resource Needs" required>
+    <button class="button" onclick="processResources()">Find Resources</button>
+</div>
+
+<button class="button" onclick="toggleSection('lessonReview')">Lesson Review</button>
+<div class="section" id="lessonReview">
+    <h2>Lesson Review</h2>
+    <input type="text" id="lessonTitle" placeholder="Lesson Title" required>
+    <textarea id="lessonFeedback" placeholder="Feedback" required></textarea>
+    <button class="button" onclick="processLessonReview()">Review Lesson</button>
+</div>
+
+<button class="button" onclick="toggleSection('assessment')">Assessment</button>
+<div class="section" id="assessment">
+    <h2>Assessment</h2>
+    <input type="text" id="assessmentTopic" placeholder="Assessment Topic" required>
+    <input type="text" id="assessmentCriteria" placeholder="Criteria" required>
+    <button class="button" onclick="processAssessment()">Create Assessment</button>
+</div>
+
+<button class="button" onclick="toggleSection('examQuestion')">Exam Question Generator</button>
+<div class="section" id="examQuestion">
+    <h2>Exam Question Generator</h2>
+    <input type="text" id="examSubject" placeholder="Subject" required>
+    <textarea id="examContent" placeholder="Content" required></textarea>
+    <button class="button" onclick="processExamQuestion()">Generate Questions</button>
+</div>
+
+<button class="button" onclick="toggleSection('attendance')">Attendance Tracker</button>
+<div class="section" id="attendance">
+    <h2>Attendance Tracker</h2>
+    <input type="text" id="studentList" placeholder="Student List" required>
+    <input type="text" id="attendance" placeholder="Attendance Status" required>
+    <button class="button" onclick="processAttendance()">Track Attendance</button>
+</div>
+
+<button class="button" onclick="toggleSection('teachingResources')">Teaching Resources Finder</button>
+<div class="section" id="teachingResources">
+    <h2>Teaching Resources Finder</h2>
+    <input type="text" id="resourceTopic" placeholder="Resource Topic" required>
+    <button class="button" onclick="processTeachingResources()">Find Resources</button>
+</div>
+
+<button class="button" onclick="toggleSection('activityIdeas')">Classroom Activity Ideas</button>
+<div class="section" id="activityIdeas">
+    <h2>Classroom Activity Ideas</h2>
+    <input type="text" id="activitySubject" placeholder="Subject" required>
+    <button class="button" onclick="processActivityIdeas()">Get Ideas</button>
+</div>
+
+<button class="button" onclick="toggleSection('performanceFeedback')">Performance Feedback</button>
+<div class="section" id="performanceFeedback">
+    <h2>Performance Feedback</h2>
+    <input type="text" id="studentPerformance" placeholder="Student Name" required>
+    <textarea id="feedbackPoints" placeholder="Feedback Points" required></textarea>
+    <button class="button" onclick="processPerformanceFeedback()">Provide Feedback</button>
+</div>
+
+<button class="button" onclick="toggleSection('meetingNotes')">Parent-Teacher Meeting Notes</button>
+<div class="section" id="meetingNotes">
+    <h2>Parent-Teacher Meeting Notes</h2>
+    <input type="date" id="meetingDate" required>
+    <textarea id="meetingNotes" placeholder="Meeting Notes" required></textarea>
+    <button class="button" onclick="processMeetingNotes()">Save Notes</button>
+</div>
+
+<button class="button" onclick="toggleSection('studySchedule')">Study Schedule Creator</button>
+<div class="section" id="studySchedule">
+    <h2>Study Schedule Creator</h2>
+    <input type="text" id="studyTopics" placeholder="Topics" required>
+    <input type="text" id="studyDuration" placeholder="Duration" required>
+    <button class="button" onclick="processStudySchedule()">Create Schedule</button>
+</div>
+
+<button class="button" onclick="toggleSection('lessonSummary')">Lesson Summary Generator</button>
+<div class="section" id="lessonSummary">
+    <h2>Lesson Summary Generator</h2>
+    <input type="text" id="summaryTopic" placeholder="Lesson Topic" required>
+    <textarea id="summaryPoints" placeholder="Key Points" required></textarea>
+    <button class="button" onclick="processLessonSummary()">Generate Summary</button>
+</div>
+
+<button class="button" onclick="toggleSection('goalSetting')">Student Goal Setting</button>
+<div class="section" id="goalSetting">
+    <h2>Student Goal Setting</h2>
+    <input type="text" id="studentNameGoal" placeholder="Student Name" required>
+    <textarea id="goalDescription" placeholder="Goal Description" required></textarea>
+    <button class="button" onclick="processGoalSetting()">Set Goals</button>
+</div>
+
+<button class="button" onclick="toggleSection('professionalDevelopment')">Professional Development Resources</button>
+<div class="section" id="professionalDevelopment">
+    <h2>Professional Development Resources</h2>
+    <input type="text" id="developmentTopic" placeholder="Area of Development" required>
+    <button class="button" onclick="processProfessionalDevelopment()">Find Resources</button>
+</div>
+
+<script>
+    function toggleSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+        const section = document.getElementById(sectionId);
+        section.style.display = section.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            console.log('Copied to clipboard:', text);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+        });
+    }
+
+    function openChatGPT(prompt) {
+        // Copy prompt to clipboard
+        copyToClipboard(prompt);
+        // Open ChatGPT in a new window
+        window.open("https://chat.openai.com/", "_blank");
+    }
+
+    function processLessonPlanning() {
+        const topic = document.getElementById('lessonTopic').value;
+        const objectives = document.getElementById('lessonObjectives').value;
+        const materials = document.getElementById('lessonMaterials').value;
+        const activities = document.getElementById('lessonActivities').value;
+
+        const prompt = `Create a detailed lesson plan for the topic: ${topic}. 
+                        Objectives: ${objectives}. 
+                        Materials Needed: ${materials}. 
+                        Activities: ${activities}.`;
+
+        openChatGPT(prompt);
+    }
+
+    function processManagementTips() {
+        const scenario = document.getElementById('classroomScenario').value;
+        const prompt = `Provide classroom management tips for the scenario: ${scenario}.`;
+        openChatGPT(prompt);
+    }
+
+    function processCommunication() {
+        const studentName = document.getElementById('studentName').value;
+        const concerns = document.getElementById('concerns').value;
+        const prompt = `Draft a message for parents about ${studentName} with the following concerns: ${concerns}.`;
+        openChatGPT(prompt);
+    }
+
+    function processHomework() {
+        const topic = document.getElementById('assignmentTopic').value;
+        const instructions = document.getElementById('assignmentInstructions').value;
+        const prompt = `Assign homework on ${topic} with the following instructions: ${instructions}.`;
+        openChatGPT(prompt);
+    }
+
+    function processResources() {
+        const needs = document.getElementById('resourceNeeds').value;
+        const prompt = `Suggest resource ideas for the following needs: ${needs}.`;
+        openChatGPT(prompt);
+    }
+
+    function processLessonReview() {
+        const title = document.getElementById('lessonTitle').value;
+        const feedback = document.getElementById('lessonFeedback').value;
+        const prompt = `Provide a review for the lesson titled "${title}" based on the following feedback: ${feedback}.`;
+        openChatGPT(prompt);
+    }
+
+    function processAssessment() {
+        const topic = document.getElementById('assessmentTopic').value;
+        const criteria = document.getElementById('assessmentCriteria').value;
+        const prompt = `Create an assessment for the topic: ${topic} with the following criteria: ${criteria}.`;
+        openChatGPT(prompt);
+    }
+
+    function processExamQuestion() {
+        const subject = document.getElementById('examSubject').value;
+        const content = document.getElementById('examContent').value;
+        const prompt = `Generate exam questions for the subject ${subject} based on the following content: ${content}.`;
+        openChatGPT(prompt);
+    }
+
+    function processAttendance() {
+        const studentList = document.getElementById('studentList').value;
+        const status = document.getElementById('attendance').value;
+        const prompt = `Track attendance for the following students: ${studentList}. Status: ${status}.`;
+        openChatGPT(prompt);
+    }
+
+    function processTeachingResources() {
+        const topic = document.getElementById('resourceTopic').value;
+        const prompt = `Find teaching resources for the topic: ${topic}.`;
+        openChatGPT(prompt);
+    }
+
+    function processActivityIdeas() {
+        const subject = document.getElementById('activitySubject').value;
+        const prompt = `Provide classroom activity ideas for the subject: ${subject}.`;
+        openChatGPT(prompt);
+    }
+
+    function processPerformanceFeedback() {
+        const studentName = document.getElementById('studentPerformance').value;
+        const feedback = document.getElementById('feedbackPoints').value;
+        const prompt = `Provide performance feedback for student: ${studentName}. Feedback points: ${feedback}.`;
+        openChatGPT(prompt);
+    }
+
+    function processMeetingNotes() {
+        const meetingDate = document.getElementById('meetingDate').value;
+        const notes = document.getElementById('meetingNotes').value;
+        const prompt = `Save meeting notes for the parent-teacher meeting on ${meetingDate}. Notes: ${notes}.`;
+        openChatGPT(prompt);
+    }
+
+    function processStudySchedule() {
+        const topics = document.getElementById('studyTopics').value;
+        const duration = document.getElementById('studyDuration').value;
+        const prompt = `Create a study schedule for the following topics: ${topics}. Duration: ${duration}.`;
+        openChatGPT(prompt);
+    }
+
+    function processLessonSummary() {
+        const topic = document.getElementById('summaryTopic').value;
+        const keyPoints = document.getElementById('summaryPoints').value;
+        const prompt = `Generate a summary for the lesson on ${topic} based on the following key points: ${keyPoints}.`;
+        openChatGPT(prompt);
+    }
+
+    function processGoalSetting() {
+        const studentName = document.getElementById('studentNameGoal').value;
+        const goalDescription = document.getElementById('goalDescription').value;
+        const prompt = `Set goals for the student ${studentName} with the following description: ${goalDescription}.`;
+        openChatGPT(prompt);
+    }
+
+    function processProfessionalDevelopment() {
+        const topic = document.getElementById('developmentTopic').value;
+        const prompt = `Find professional development resources for: ${topic}.`;
+        openChatGPT(prompt);
+    }
+</script>
+<!-- Lesson Plan Analyzer Tool -->
+<button class="button" onclick="toggleSection('lessonPlanAnalyzer')">Lesson Plan Analyzer</button>
+<div class="section" id="lessonPlanAnalyzer">
+    <h2>Lesson Plan Analyzer</h2>
+    <input type="text" id="lessonPlanInput" placeholder="Paste Lesson Plan Here" required>
+    <button class="button" onclick="processLessonPlanAnalysis()">Analyze Plan</button>
+</div>
+
+<script>
+    function processLessonPlanAnalysis() {
+        const lessonPlan = document.getElementById('lessonPlanInput').value;
+        const prompt = `Analyze the following lesson plan: ${lessonPlan}. Provide feedback for improvement.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Interactive Learning Module Creator Tool -->
+<button class="button" onclick="toggleSection('learningModule')">Interactive Learning Module</button>
+<div class="section" id="learningModule">
+    <h2>Interactive Learning Module</h2>
+    <input type="text" id="moduleTopic" placeholder="Module Topic" required>
+    <textarea id="moduleContent" placeholder="Content for Module" required></textarea>
+    <button class="button" onclick="processLearningModule()">Create Module</button>
+</div>
+
+<script>
+    function processLearningModule() {
+        const topic = document.getElementById('moduleTopic').value;
+        const content = document.getElementById('moduleContent').value;
+        const prompt = `Create an interactive learning module for the topic: ${topic}. Content: ${content}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Time Management Planner Tool -->
+<button class="button" onclick="toggleSection('timeManagement')">Time Management Planner</button>
+<div class="section" id="timeManagement">
+    <h2>Time Management Planner</h2>
+    <input type="text" id="weeklyGoals" placeholder="Weekly Goals" required>
+    <textarea id="scheduleDetails" placeholder="Current Schedule" required></textarea>
+    <button class="button" onclick="processTimeManagement()">Create Time Plan</button>
+</div>
+
+<script>
+    function processTimeManagement() {
+        const goals = document.getElementById('weeklyGoals').value;
+        const schedule = document.getElementById('scheduleDetails').value;
+        const prompt = `Create a time management plan based on the following goals: ${goals}. Current schedule: ${schedule}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Digital Grading Assistant Tool -->
+<button class="button" onclick="toggleSection('gradingAssistant')">Digital Grading Assistant</button>
+<div class="section" id="gradingAssistant">
+    <h2>Digital Grading Assistant</h2>
+    <input type="text" id="assignmentDetails" placeholder="Assignment Details" required>
+    <textarea id="studentResponses" placeholder="Student Responses" required></textarea>
+    <button class="button" onclick="processGrading()">Grade Assignments</button>
+</div>
+
+<script>
+    function processGrading() {
+        const assignmentDetails = document.getElementById('assignmentDetails').value;
+        const studentResponses = document.getElementById('studentResponses').value;
+        const prompt = `Grade the following student responses for the assignment: ${assignmentDetails}. Responses: ${studentResponses}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Parent Communication Portal Tool -->
+<button class="button" onclick="toggleSection('parentCommunication')">Parent Communication Portal</button>
+<div class="section" id="parentCommunication">
+    <h2>Parent Communication Portal</h2>
+    <input type="text" id="studentNameCommunication" placeholder="Student Name" required>
+    <textarea id="communicationDetails" placeholder="Communication Details" required></textarea>
+    <button class="button" onclick="processParentCommunication()">Send Communication</button>
+</div>
+
+<script>
+    function processParentCommunication() {
+        const studentName = document.getElementById('studentNameCommunication').value;
+        const details = document.getElementById('communicationDetails').value;
+        const prompt = `Draft a message for parents about ${studentName} with the following details: ${details}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Feedback Loop Generator Tool -->
+<button class="button" onclick="toggleSection('feedbackLoop')">Feedback Loop Generator</button>
+<div class="section" id="feedbackLoop">
+    <h2>Feedback Loop Generator</h2>
+    <input type="text" id="feedbackQuestions" placeholder="Feedback Questions" required>
+    <textarea id="studentResponsesFeedback" placeholder="Student Responses" required></textarea>
+    <button class="button" onclick="processFeedbackLoop()">Generate Feedback</button>
+</div>
+
+<script>
+    function processFeedbackLoop() {
+        const questions = document.getElementById('feedbackQuestions').value;
+        const responses = document.getElementById('studentResponsesFeedback').value;
+        const prompt = `Generate feedback based on the following questions: ${questions}. Student responses: ${responses}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Collaborative Curriculum Development Tool -->
+<button class="button" onclick="toggleSection('curriculumDevelopment')">Curriculum Development Tool</button>
+<div class="section" id="curriculumDevelopment">
+    <h2>Curriculum Development Tool</h2>
+    <textarea id="curriculumIdeas" placeholder="Curriculum Ideas" required></textarea>
+    <button class="button" onclick="processCurriculumDevelopment()">Share Ideas</button>
+</div>
+
+<script>
+    function processCurriculumDevelopment() {
+        const ideas = document.getElementById('curriculumIdeas').value;
+        const prompt = `Collaborate on curriculum development with the following ideas: ${ideas}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Behavior Tracking System Tool -->
+<button class="button" onclick="toggleSection('behaviorTracking')">Behavior Tracking System</button>
+<div class="section" id="behaviorTracking">
+    <h2>Behavior Tracking System</h2>
+    <input type="text" id="studentNameBehavior" placeholder="Student Name" required>
+    <textarea id="behaviorNotes" placeholder="Behavior Notes" required></textarea>
+    <button class="button" onclick="processBehaviorTracking()">Track Behavior</button>
+</div>
+
+<script>
+    function processBehaviorTracking() {
+        const studentName = document.getElementById('studentNameBehavior').value;
+        const notes = document.getElementById('behaviorNotes').value;
+        const prompt = `Track behavior for student ${studentName} with the following notes: ${notes}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Virtual Classroom Simulator Tool -->
+<button class="button" onclick="toggleSection('classroomSimulator')">Virtual Classroom Simulator</button>
+<div class="section" id="classroomSimulator">
+    <h2>Virtual Classroom Simulator</h2>
+    <textarea id="classroomScenario" placeholder="Classroom Management Scenario" required></textarea>
+    <button class="button" onclick="processClassroomSimulation()">Simulate Scenario</button>
+</div>
+
+<script>
+    function processClassroomSimulation() {
+        const scenario = document.getElementById('classroomScenario').value;
+        const prompt = `Simulate a virtual classroom scenario for the following management situation: ${scenario}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <!-- Digital Resource Library Tool -->
+<button class="button" onclick="toggleSection('resourceLibrary')">Digital Resource Library</button>
+<div class="section" id="resourceLibrary">
+    <h2>Digital Resource Library</h2>
+    <input type="text" id="resourceSearch" placeholder="Search Resources" required>
+    <button class="button" onclick="processResourceLibrary()">Find Resources</button>
+</div>
+
+<script>
+    function processResourceLibrary() {
+        const searchTerm = document.getElementById('resourceSearch').value;
+        const prompt = `Find teaching resources related to: ${searchTerm}.`;
+        openChatGPT(prompt);
+    }
+           function searchTools() {
+    const input = document.getElementById('searchBar').value.toLowerCase();
+    const buttons = document.querySelectorAll('.button');
+
+    buttons.forEach(button => {
+        const buttonText = button.textContent.toLowerCase();
+        if (buttonText.includes(input)) {
+            button.style.display = 'inline-block'; // Show button if it matches
+        } else {
+            button.style.display = 'none'; // Hide button if it doesn't match
+        }
+    });
+}
+
+  </script>
+ <button class="button" onclick="toggleSection('inclusivePlanning')">Inclusive Lesson Planning</button>
+<div class="section" id="inclusivePlanning">
+    <h2>Inclusive Lesson Planning</h2>
+    <input type="text" id="inclusiveTopic" placeholder="Lesson Topic" required>
+    <textarea id="inclusiveStrategies" placeholder="Inclusion Strategies" required></textarea>
+    <button class="button" onclick="processInclusivePlanning()">Generate Inclusive Plan</button>
+</div>
+
+<script>
+    function processInclusivePlanning() {
+        const topic = document.getElementById('inclusiveTopic').value;
+        const strategies = document.getElementById('inclusiveStrategies').value;
+        const prompt = `Create an inclusive lesson plan for the topic: ${topic} with the following strategies: ${strategies}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('engagementStrategies')">Student Engagement Strategies</button>
+<div class="section" id="engagementStrategies">
+    <h2>Student Engagement Strategies</h2>
+    <textarea id="engagementTopic" placeholder="Topic or Subject" required></textarea>
+    <button class="button" onclick="processEngagementStrategies()">Get Strategies</button>
+</div>
+
+<script>
+    function processEngagementStrategies() {
+        const topic = document.getElementById('engagementTopic').value;
+        const prompt = `Suggest strategies to improve student engagement in the topic: ${topic}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('communicationLog')">Parent-Teacher Communication Log</button>
+<div class="section" id="communicationLog">
+    <h2>Parent-Teacher Communication Log</h2>
+    <input type="text" id="parentNameLog" placeholder="Parent's Name" required>
+    <textarea id="communicationDetailsLog" placeholder="Communication Details" required></textarea>
+    <input type="date" id="communicationDate" required>
+    <button class="button" onclick="processCommunicationLog()">Save Log</button>
+</div>
+
+<script>
+    function processCommunicationLog() {
+        const parentName = document.getElementById('parentNameLog').value;
+        const details = document.getElementById('communicationDetailsLog').value;
+        const date = document.getElementById('communicationDate').value;
+        const prompt = `Log communication with ${parentName} on ${date}: ${details}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('lessonTemplateGenerator')">Customizable Lesson Template</button>
+<div class="section" id="lessonTemplateGenerator">
+    <h2>Customizable Lesson Template Generator</h2>
+    <input type="text" id="templateSubject" placeholder="Subject" required>
+    <textarea id="templateDetails" placeholder="Details for the template" required></textarea>
+    <button class="button" onclick="processLessonTemplate()">Generate Template</button>
+</div>
+
+<script>
+    function processLessonTemplate() {
+        const subject = document.getElementById('templateSubject').value;
+        const details = document.getElementById('templateDetails').value;
+        const prompt = `Create a customizable lesson template for the subject: ${subject}. Include the following details: ${details}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('behaviorManagement')">Behavior Management Strategies</button>
+<div class="section" id="behaviorManagement">
+    <h2>Behavior Management Strategies</h2>
+    <input type="text" id="studentBehavior" placeholder="Describe the behavior" required>
+    <button class="button" onclick="processBehaviorManagement()">Get Strategies</button>
+</div>
+
+<script>
+    function processBehaviorManagement() {
+        const behavior = document.getElementById('studentBehavior').value;
+        const prompt = `Suggest behavior management strategies for the following behavior: ${behavior}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('reflectionJournal')">Teacher Reflection Journal</button>
+<div class="section" id="reflectionJournal">
+    <h2>Teacher Reflection Journal</h2>
+    <input type="date" id="reflectionDate" required>
+    <textarea id="reflectionNotes" placeholder="Reflection Notes" required></textarea>
+    <button class="button" onclick="processReflectionJournal()">Save Reflection</button>
+</div>
+
+<script>
+    function processReflectionJournal() {
+        const date = document.getElementById('reflectionDate').value;
+        const notes = document.getElementById('reflectionNotes').value;
+        const prompt = `Reflection for ${date}: ${notes}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('peerReview')">Peer Review System</button>
+<div class="section" id="peerReview">
+    <h2>Peer Review System</h2>
+    <input type="text" id="projectName" placeholder="Project Name" required>
+    <textarea id="reviewCriteria" placeholder="Review Criteria" required></textarea>
+    <button class="button" onclick="processPeerReview()">Create Peer Review</button>
+</div>
+
+<script>
+    function processPeerReview() {
+        const projectName = document.getElementById('projectName').value;
+        const criteria = document.getElementById('reviewCriteria').value;
+        const prompt = `Create a peer review system for the project "${projectName}" with the following criteria: ${criteria}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('resourceLibrary')">Digital Resource Library</button>
+<div class="section" id="resourceLibrary">
+    <h2>Digital Resource Library</h2>
+    <input type="text" id="resourceTopicLibrary" placeholder="Resource Topic" required>
+    <button class="button" onclick="processResourceLibrary()">Find Digital Resources</button>
+</div>
+
+<script>
+    function processResourceLibrary() {
+        const topic = document.getElementById('resourceTopicLibrary').value;
+        const prompt = `Curate a list of digital resources for the topic: ${topic}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('classroomLayout')">Classroom Layout Planner</button>
+<div class="section" id="classroomLayout">
+    <h2>Classroom Layout Planner</h2>
+    <textarea id="layoutNeeds" placeholder="Classroom Needs" required></textarea>
+    <button class="button" onclick="processClassroomLayout()">Generate Layout Plan</button>
+</div>
+
+<script>
+    function processClassroomLayout() {
+        const needs = document.getElementById('layoutNeeds').value;
+        const prompt = `Create a classroom layout plan based on the following needs: ${needs}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('progressTracker')">Student Progress Tracker</button>
+<div class="section" id="progressTracker">
+    <h2>Student Progress Tracker</h2>
+    <input type="text" id="studentNameProgress" placeholder="Student Name" required>
+    <textarea id="progressDetails" placeholder="Progress Details" required></textarea>
+    <button class="button" onclick="processProgressTracker()">Track Progress</button>
+</div>
+
+<script>
+    function processProgressTracker() {
+        const studentName = document.getElementById('studentNameProgress').value;
+        const details = document.getElementById('progressDetails').value;
+        const prompt = `Track progress for ${studentName} with the following details: ${details}.`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('studyGuideCreator')">Study Guide Creator</button>
+<div class="section" id="studyGuideCreator">
+    <h2>Study Guide Creator</h2>
+    <select id="classSelectStudy">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectStudy" placeholder="Subject" required>
+    <input type="text" id="chapterStudy" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandStudy" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processStudyGuide()">Create Study Guide</button>
+</div>
+
+<script>
+    function processStudyGuide() {
+        const classLevel = document.getElementById('classSelectStudy').value;
+        const subject = document.getElementById('subjectStudy').value;
+        const chapter = document.getElementById('chapterStudy').value;
+        const commands = document.getElementById('commandStudy').value;
+        const prompt = `Create a study guide for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('projectGuidelines')">Project Guidelines Generator</button>
+<div class="section" id="projectGuidelines">
+    <h2>Project Guidelines Generator</h2>
+    <select id="classSelectProject">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectProject" placeholder="Subject" required>
+    <input type="text" id="chapterProject" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandProject" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processProjectGuidelines()">Generate Project Guidelines</button>
+</div>
+
+<script>
+    function processProjectGuidelines() {
+        const classLevel = document.getElementById('classSelectProject').value;
+        const subject = document.getElementById('subjectProject').value;
+        const chapter = document.getElementById('chapterProject').value;
+        const commands = document.getElementById('commandProject').value;
+        const prompt = `Generate project guidelines for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('lessonPlanGenerator')">Lesson Plan Generator</button>
+<div class="section" id="lessonPlanGenerator">
+    <h2>Lesson Plan Generator</h2>
+    <select id="classSelectLesson">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectLesson" placeholder="Subject" required>
+    <input type="text" id="chapterLesson" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandLesson" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processLessonPlan()">Generate Lesson Plan</button>
+</div>
+
+<script>
+    function processLessonPlan() {
+        const classLevel = document.getElementById('classSelectLesson').value;
+        const subject = document.getElementById('subjectLesson').value;
+        const chapter = document.getElementById('chapterLesson').value;
+        const commands = document.getElementById('commandLesson').value;
+        const prompt = `Generate a lesson plan for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('quizCreator')">Quiz Creator</button>
+<div class="section" id="quizCreator">
+    <h2>Quiz Creator</h2>
+    <select id="classSelectQuiz">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectQuiz" placeholder="Subject" required>
+    <input type="text" id="chapterQuiz" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandQuiz" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processQuiz()">Create Quiz</button>
+</div>
+
+<script>
+    function processQuiz() {
+        const classLevel = document.getElementById('classSelectQuiz').value;
+        const subject = document.getElementById('subjectQuiz').value;
+        const chapter = document.getElementById('chapterQuiz').value;
+        const commands = document.getElementById('commandQuiz').value;
+        const prompt = `Create a quiz for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('homeworkGenerator')">Homework Assignment Generator</button>
+<div class="section" id="homeworkGenerator">
+    <h2>Homework Assignment Generator</h2>
+    <select id="classSelectHomework">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectHomework" placeholder="Subject" required>
+    <input type="text" id="chapterHomework" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandHomework" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processHomework()">Generate Homework Assignment</button>
+</div>
+
+<script>
+    function processHomework() {
+        const classLevel = document.getElementById('classSelectHomework').value;
+        const subject = document.getElementById('subjectHomework').value;
+        const chapter = document.getElementById('chapterHomework').value;
+        const commands = document.getElementById('commandHomework').value;
+        const prompt = `Generate a homework assignment for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('gameIdeas')">Educational Game Ideas</button>
+<div class="section" id="gameIdeas">
+    <h2>Educational Game Ideas</h2>
+    <select id="classSelectGames">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectGames" placeholder="Subject" required>
+    <input type="text" id="chapterGames" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandGames" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processGameIdeas()">Generate Game Ideas</button>
+</div>
+
+<script>
+    function processGameIdeas() {
+        const classLevel = document.getElementById('classSelectGames').value;
+        const subject = document.getElementById('subjectGames').value;
+        const chapter = document.getElementById('chapterGames').value;
+        const commands = document.getElementById('commandGames').value;
+        const prompt = `Generate ideas for educational games for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('assessmentCriteria')">Assessment Criteria Generator</button>
+<div class="section" id="assessmentCriteria">
+    <h2>Assessment Criteria Generator</h2>
+    <select id="classSelectAssessment">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectAssessment" placeholder="Subject" required>
+    <input type="text" id="chapterAssessment" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandAssessment" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processAssessmentCriteria()">Generate Assessment Criteria</button>
+</div>
+
+<script>
+    function processAssessmentCriteria() {
+        const classLevel = document.getElementById('classSelectAssessment').value;
+        const subject = document.getElementById('subjectAssessment').value;
+        const chapter = document.getElementById('chapterAssessment').value;
+        const commands = document.getElementById('commandAssessment').value;
+        const prompt = `Generate assessment criteria for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('activityPlanner')">Interactive Activity Planner</button>
+<div class="section" id="activityPlanner">
+    <h2>Interactive Activity Planner</h2>
+    <select id="classSelectActivity">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectActivity" placeholder="Subject" required>
+    <input type="text" id="chapterActivity" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandActivity" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processActivityPlanner()">Create Activity Plan</button>
+</div>
+
+<script>
+    function processActivityPlanner() {
+        const classLevel = document.getElementById('classSelectActivity').value;
+        const subject = document.getElementById('subjectActivity').value;
+        const chapter = document.getElementById('chapterActivity').value;
+        const commands = document.getElementById('commandActivity').value;
+        const prompt = `Create an interactive activity plan for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('presentationOutline')">Presentation Outline Generator</button>
+<div class="section" id="presentationOutline">
+    <h2>Presentation Outline Generator</h2>
+    <select id="classSelectPresentation">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectPresentation" placeholder="Subject" required>
+    <input type="text" id="chapterPresentation" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandPresentation" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processPresentationOutline()">Generate Outline</button>
+</div>
+
+<script>
+    function processPresentationOutline() {
+        const classLevel = document.getElementById('classSelectPresentation').value;
+        const subject = document.getElementById('subjectPresentation').value;
+        const chapter = document.getElementById('chapterPresentation').value;
+        const commands = document.getElementById('commandPresentation').value;
+        const prompt = `Generate a presentation outline for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('flashcardGenerator')">Flashcard Generator</button>
+<div class="section" id="flashcardGenerator">
+    <h2>Flashcard Generator</h2>
+    <select id="classSelectFlashcards">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectFlashcards" placeholder="Subject" required>
+    <input type="text" id="chapterFlashcards" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandFlashcards" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processFlashcards()">Generate Flashcards</button>
+</div>
+
+<script>
+    function processFlashcards() {
+        const classLevel = document.getElementById('classSelectFlashcards').value;
+        const subject = document.getElementById('subjectFlashcards').value;
+        const chapter = document.getElementById('chapterFlashcards').value;
+        const commands = document.getElementById('commandFlashcards').value;
+        const prompt = `Generate flashcards for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('stemActivity')">STEM Activity Generator</button>
+<div class="section" id="stemActivity">
+    <h2>STEM Activity Generator</h2>
+    <select id="classSelectSTEM">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectSTEM" placeholder="Subject" required>
+    <input type="text" id="chapterSTEM" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandSTEM" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processSTEMActivity()">Generate STEM Activity</button>
+</div>
+
+<script>
+    function processSTEMActivity() {
+        const classLevel = document.getElementById('classSelectSTEM').value;
+        const subject = document.getElementById('subjectSTEM').value;
+        const chapter = document.getElementById('chapterSTEM').value;
+        const commands = document.getElementById('commandSTEM').value;
+        const prompt = `Generate STEM activities for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('culturalAwareness')">Cultural Awareness Activities</button>
+<div class="section" id="culturalAwareness">
+    <h2>Cultural Awareness Activities</h2>
+    <select id="classSelectCultural">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectCultural" placeholder="Subject" required>
+    <input type="text" id="chapterCultural" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandCultural" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processCulturalAwareness()">Generate Cultural Awareness Activities</button>
+</div>
+
+<script>
+    function processCulturalAwareness() {
+        const classLevel = document.getElementById('classSelectCultural').value;
+        const subject = document.getElementById('subjectCultural').value;
+        const chapter = document.getElementById('chapterCultural').value;
+        const commands = document.getElementById('commandCultural').value;
+        const prompt = `Generate cultural awareness activities for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('classroomManagement')">Classroom Management Strategies</button>
+<div class="section" id="classroomManagement">
+    <h2>Classroom Management Strategies</h2>
+    <select id="classSelectManagement">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectManagement" placeholder="Subject" required>
+    <input type="text" id="chapterManagement" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandManagement" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processClassroomManagement()">Generate Management Strategies</button>
+</div>
+
+<script>
+    function processClassroomManagement() {
+        const classLevel = document.getElementById('classSelectManagement').value;
+        const subject = document.getElementById('subjectManagement').value;
+        const chapter = document.getElementById('chapterManagement').value;
+        const commands = document.getElementById('commandManagement').value;
+        const prompt = `Generate classroom management strategies for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('communicationTemplate')">Parent-Teacher Communication Template</button>
+<div class="section" id="communicationTemplate">
+    <h2>Parent-Teacher Communication Template</h2>
+    <select id="classSelectCommunication">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectCommunication" placeholder="Subject" required>
+    <input type="text" id="chapterCommunication" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandCommunication" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processCommunicationTemplate()">Generate Communication Template</button>
+</div>
+
+<script>
+    function processCommunicationTemplate() {
+        const classLevel = document.getElementById('classSelectCommunication').value;
+        const subject = document.getElementById('subjectCommunication').value;
+        const chapter = document.getElementById('chapterCommunication').value;
+        const commands = document.getElementById('commandCommunication').value;
+        const prompt = `Generate a parent-teacher communication template for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('behavioralActivityPlanner')">Behavioral Activity Planner</button>
+<div class="section" id="behavioralActivityPlanner">
+    <h2>Behavioral Activity Planner</h2>
+    <select id="classSelectBehavior">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectBehavior" placeholder="Subject" required>
+    <input type="text" id="chapterBehavior" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandBehavior" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processBehavioralActivity()">Create Behavioral Activity Plan</button>
+</div>
+
+<script>
+    function processBehavioralActivity() {
+        const classLevel = document.getElementById('classSelectBehavior').value;
+        const subject = document.getElementById('subjectBehavior').value;
+        const chapter = document.getElementById('chapterBehavior').value;
+        const commands = document.getElementById('commandBehavior').value;
+        const prompt = `Create a behavioral activity plan for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('feedbackCollection')">Feedback Collection Tool</button>
+<div class="section" id="feedbackCollection">
+    <h2>Feedback Collection Tool</h2>
+    <select id="classSelectFeedback">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectFeedback" placeholder="Subject" required>
+    <input type="text" id="chapterFeedback" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandFeedback" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processFeedbackCollection()">Generate Feedback Tool</button>
+</div>
+
+<script>
+    function processFeedbackCollection() {
+        const classLevel = document.getElementById('classSelectFeedback').value;
+        const subject = document.getElementById('subjectFeedback').value;
+        const chapter = document.getElementById('chapterFeedback').value;
+        const commands = document.getElementById('commandFeedback').value;
+        const prompt = `Generate tools or methods for collecting student feedback for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('reflectionActivity')">Student Reflection Activity</button>
+<div class="section" id="reflectionActivity">
+    <h2>Student Reflection Activity</h2>
+    <select id="classSelectReflection">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectReflection" placeholder="Subject" required>
+    <input type="text" id="chapterReflection" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandReflection" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processReflectionActivity()">Generate Reflection Activity</button>
+</div>
+
+<script>
+    function processReflectionActivity() {
+        const classLevel = document.getElementById('classSelectReflection').value;
+        const subject = document.getElementById('subjectReflection').value;
+        const chapter = document.getElementById('chapterReflection').value;
+        const commands = document.getElementById('commandReflection').value;
+        const prompt = `Create a student reflection activity for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('visualAids')">Visual Aids Generator</button>
+<div class="section" id="visualAids">
+    <h2>Visual Aids Generator</h2>
+    <select id="classSelectVisual">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectVisual" placeholder="Subject" required>
+    <input type="text" id="chapterVisual" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandVisual" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processVisualAids()">Generate Visual Aids</button>
+</div>
+
+<script>
+    function processVisualAids() {
+        const classLevel = document.getElementById('classSelectVisual').value;
+        const subject = document.getElementById('subjectVisual').value;
+        const chapter = document.getElementById('chapterVisual').value;
+        const commands = document.getElementById('commandVisual').value;
+        const prompt = `Generate ideas for visual aids for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  <button class="button" onclick="toggleSection('differentiatedInstruction')">Differentiated Instruction Strategies</button>
+<div class="section" id="differentiatedInstruction">
+    <h2>Differentiated Instruction Strategies</h2>
+    <select id="classSelectDifferentiated">
+        <option value="5">5th Grade</option>
+        <option value="6">6th Grade</option>
+        <option value="7">7th Grade</option>
+        <option value="8">8th Grade</option>
+        <option value="9">9th Grade</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+    </select>
+    <input type="text" id="subjectDifferentiated" placeholder="Subject" required>
+    <input type="text" id="chapterDifferentiated" placeholder="Chapter/Topic Name" required>
+    <textarea id="commandDifferentiated" placeholder="Special Commands (optional)"></textarea>
+    <button class="button" onclick="processDifferentiatedInstruction()">Generate Differentiated Instruction Strategies</button>
+</div>
+
+<script>
+    function processDifferentiatedInstruction() {
+        const classLevel = document.getElementById('classSelectDifferentiated').value;
+        const subject = document.getElementById('subjectDifferentiated').value;
+        const chapter = document.getElementById('chapterDifferentiated').value;
+        const commands = document.getElementById('commandDifferentiated').value;
+        const prompt = `Generate differentiated instruction strategies for ${classLevel} grade in ${subject} for chapter ${chapter}. ${commands}`;
+        openChatGPT(prompt);
+    }
+  </script>
+  
+</body>
+</html>
